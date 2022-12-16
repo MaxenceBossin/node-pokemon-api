@@ -1,0 +1,19 @@
+{
+  "name": "node-pokemon-api",
+  "version": "1.0.0",
+  "description": "tutoriel de Simon Dieny : https://www.youtube.com/watch?v=NRxzvpdduvQ",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Maxence Bsn",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "save": "^2.9.0",
+    "save-dev": "^0.0.1-security",
+    "serve-favicon": "^2.5.0"
+  }
+}
