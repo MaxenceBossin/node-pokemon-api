@@ -3,13 +3,16 @@ const app = express()
 const port = 3000
 const { success, getUniqueId } = require('./helper')
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 const favicon = require('serve-favicon')
 let pokemons = require('./mock-pokemon')
 
 /* Middleware */
 
-app.use(favicon(__dirname + '/assets/image/favicon.ico'))
+app
+    .use(favicon(__dirname + '/assets/image/favicon.ico'))
     .use(morgan('dev'))
+    .use(bodyParser.json())
 
 
 app.get('/', (request, response) => response.send('Hello 🦊🦊🦊🦊'))
