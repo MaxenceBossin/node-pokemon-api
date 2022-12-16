@@ -2,11 +2,12 @@ const express = require('express')
 const app = express()
 const port = 3000
 const { success, getUniqueId } = require('./helper')
-const { Sequelize } = require('sequelize')
+const { Sequelize, DataTypes } = require('sequelize')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const favicon = require('serve-favicon')
 let pokemons = require('./mock-pokemon')
+const PokemonModel = require('./source/models/pokemon')
 
 /* co bdd */
 const sequelize = new Sequelize(
@@ -22,10 +23,24 @@ const sequelize = new Sequelize(
         logging: false
     }
 )
-
 sequelize.authenticate()
     .then( _ => console.info('Connexion réussi'))
     .catch( error => console.error(`Connexion raté ${error}`))
+const Pokemon = PokemonModel(sequelize, DataTypes)
+sequelize.sync({force: true}) // Crée la bdd
+    .then(_ => {
+        console.log('La bdd à été mise à jour')
+
+        pokemons.map(pkm => {
+            Pokemon.create({
+                name: pkm.name,
+                hp: pkm.hp,
+                cp: pkm.cp,
+                picture: pkm.picture,
+                types: pkm.types.join()
+            }).then(pkm => console.log(pkm.toJSON()))
+        })
+    })
 
 /* Middleware */
 
