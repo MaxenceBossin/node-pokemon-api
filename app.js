@@ -11,13 +11,14 @@ const port = 3000
 
 
 /* Middleware */
-
 app
     .use(favicon(__dirname + '/assets/image/favicon.ico'))
     .use(morgan('dev'))
     .use(bodyParser.json())
+/* mets la bdd à l'état initial
 sequelize.initDb()
-/* point de terminison */
+*/
+/* point de terminaison */
 
 require('./source/routes/pokemon/findAll')(app)
 require('./source/routes/pokemon/findOne')(app)
