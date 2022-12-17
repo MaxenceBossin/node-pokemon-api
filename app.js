@@ -17,5 +17,13 @@ app
     .use(morgan('dev'))
     .use(bodyParser.json())
 sequelize.initDb()
+/* point de terminison */
+
+require('./source/routes/pokemon/findAll')(app)
+require('./source/routes/pokemon/findOne')(app)
+require('./source/routes/pokemon/create')(app)
+require('./source/routes/pokemon/update')(app)
+require('./source/routes/pokemon/delete')(app)
+
 /* up serve */
 app.listen(port, () => console.log(`l'application est démarré sur le port ${port}`))
